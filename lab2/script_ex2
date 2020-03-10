@@ -1,0 +1,67 @@
+#!bin/bash
+
+# Piotr Tocicki
+# Zadanie 12
+
+sciezka1=$1
+sciezka2=$2
+
+if [ "$#" -ne 2 ]; then
+    echo "Illegal number of parameters"
+    exit 1
+fi
+
+#sciezka2=/Users/peterses/Desktop/listaPlikow.txt
+#sciezka1=/Users/peterses/Desktop/zad12
+
+if [ ! -f "$sciezka2" ] || [ ! -w "$sciezka2" ]
+then
+    echo "$sciezka2 not exist or you dont have privileges"
+    exit 1
+fi
+
+list="$(cat $sciezka2)"
+
+
+for var in $list # lista - zawartosc pliku
+do
+
+	for folder_file in $sciezka1/*
+	do
+
+	if [[ $(basename "$var") == $(basename "$folder_file") ]] && [ -x $folder_file ]
+	then
+		echo "Deleting file if it's executable and has same name"
+		$(rm $folder_file)
+	fi
+
+	#echo "$folder_file"
+
+	if [ -d $folder_file ]
+	then
+		for files in $folder_file/*
+		do
+			if [[ $(basename $files) == $(basename $sciezka2) ]]
+			then
+				for files2 in $folder_file/*
+				do
+					for var2 in $list
+					do
+						#echo "$files2"
+						#echo "$var2"
+						if [[ $(basename $files2) == $(basename $var2) ]] && [ -x $files2 ]
+						then
+							echo "Deleting file if it's executable and has same name"
+							$(rm $files2)	
+						fi
+						$(touch $folder_file/$var2)
+					done
+
+				done
+			fi
+		done
+	fi
+	done
+	$(touch $sciezka1/$var)
+
+done
