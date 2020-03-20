@@ -1,27 +1,22 @@
 #!bin/bash
 
-# Piotr Tocicki, 241143
-# Zadanie 8
+# ZADANIE 8
 
-sciezka1=$1
-sciezka=$2
-
-#sciezka1=/Users/peterses/Desktop/kat1
-#sciezka2=/Users/peterses/Desktop/kat2
+path1=$1
+path2=$2
 
 iter=0
 
-for file in $sciezka1/*
+for file in $path1/*
 do
 	lista[iter]=$(basename $file)
 	#echo "$(basename $file)"
 	iter=$((iter+1))
 done
 
-
 iter2=$((0))
 
-for file2 in $sciezka2/*
+for file2 in $path2/*
 do 
 	if [ $(basename $file2) == ${lista[$iter2])} ]
 	then

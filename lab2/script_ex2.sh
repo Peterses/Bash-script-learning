@@ -1,32 +1,29 @@
 #!bin/bash
 
-# Piotr Tocicki
-# Zadanie 12
 
-sciezka1=$1
-sciezka2=$2
+# Exercise 12
+
+path1=$1
+path2=$2
 
 if [ "$#" -ne 2 ]; then
     echo "Illegal number of parameters"
     exit 1
 fi
 
-#sciezka2=/Users/peterses/Desktop/listaPlikow.txt
-#sciezka1=/Users/peterses/Desktop/zad12
-
-if [ ! -f "$sciezka2" ] || [ ! -w "$sciezka2" ]
+if [ ! -f "$path2" ] || [ ! -w "$path2" ]
 then
-    echo "$sciezka2 not exist or you dont have privileges"
+    echo "$path2 not exist or you dont have privileges"
     exit 1
 fi
 
-list="$(cat $sciezka2)"
+list="$(cat $path2)"
 
 
 for var in $list # lista - zawartosc pliku
 do
 
-	for folder_file in $sciezka1/*
+	for folder_file in $path1/*
 	do
 
 	if [[ $(basename "$var") == $(basename "$folder_file") ]] && [ -x $folder_file ]
@@ -41,7 +38,7 @@ do
 	then
 		for files in $folder_file/*
 		do
-			if [[ $(basename $files) == $(basename $sciezka2) ]]
+			if [[ $(basename $files) == $(basename $path2) ]]
 			then
 				for files2 in $folder_file/*
 				do
@@ -62,6 +59,6 @@ do
 		done
 	fi
 	done
-	$(touch $sciezka1/$var)
+	$(touch $path1/$var)
 
 done
