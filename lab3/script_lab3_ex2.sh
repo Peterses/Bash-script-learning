@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 
 # Napisz skrypt, który dla wszystkich plików wykonywalnych z jakiegoś katalogu (parametr wywołania skryptu) utworzy dowiązania twarde w drugim katalogu (parametr wywołania skryptu), 
@@ -8,6 +8,8 @@
 # c) zadbaj o to, żeby dowiązania symboliczne byłī stworzone względem katalogu roboczego (pwd)
 # d) w przypadku podkatalogów pierwszego danego katalogu, utwórz odpowiednie odwiązania do plików z tych podkatalogów w drugim danym katalogu (załóż, że nazwy plików są unikalne)
 
+path1=${1:-/Users/peterses/Desktop/D}
+path2=${2:-/Users/peterses/Desktop/K}
 
 if [ "$#" -ne 2 ]; then
     echo "Illegal number of parameters"
@@ -27,7 +29,7 @@ do
 
             if [ $file -ef $path2/$(basename $file2) ]
             then
-               echo "$file jest dowiazanie twarde" 
+               echo "$file is hard link" 
             else
                 filename=$(basename $file)
                 ln $file $path2/"$filename"  

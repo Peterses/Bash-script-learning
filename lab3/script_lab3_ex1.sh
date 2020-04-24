@@ -1,17 +1,17 @@
-#!bin/bash
+#!/bin/bash
 
 
 # zadanie 23. Napisz skrypt, który sprawdzi zawartość katalogu (parametr wywołania skryptu) i usunie z niego wszystkie wiszące dowiązania miękkie (wskazujące na nieistniejące elementy). 
 
 
-path1=$1
+path1=${1:-/Users/peterses/Desktop/D}
 
 
 for file in $path1/*
 do
     if [ -L $file ] # is it symlink
     then
-        echo "$file - dowiazanie miekkie"
+        echo "$file - symbolic link"
 
         path_to_sym=$(readlink $file)
 

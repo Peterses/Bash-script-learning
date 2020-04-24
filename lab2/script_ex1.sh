@@ -1,9 +1,9 @@
-#!bin/bash
+#!/bin/bash
 
 # ZADANIE 8
 
-path1=$1
-path2=$2
+path1=${1:-/Users/peterses/Desktop/D}
+path2=${2:-/Users/peterses/Desktop/K}
 
 iter=0
 
